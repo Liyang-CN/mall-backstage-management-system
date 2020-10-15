@@ -22,17 +22,17 @@
         </el-form-item>
 
         <!-- 原生 上传图片-start -->
-        <!-- <el-form-item label="图片" v-if="!form.pid == 0">
+        <el-form-item label="图片" v-if="!form.pid == 0">
           <div class="my-upload">
             <h3>+</h3>
             <img class="img" v-if="imgUrl" :src="imgUrl" />
             <input @change="getFile" class="my-input" type="file" />
           </div>
-        </el-form-item> -->
+        </el-form-item>
         <!-- 原生 上传图片-end -->
 
         <!-- element-ui 上传照片 start -->
-        <el-form-item label="图片" v-if="!form.pid == 0">
+        <!-- <el-form-item label="图片" v-if="!form.pid == 0">
           <el-upload
             class="avatar-uploader"
             action="#"
@@ -42,7 +42,7 @@
             <img v-if="imgUrl" :src="imgUrl" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
-        </el-form-item>
+        </el-form-item> -->
         <!-- element-ui 上传照片 end -->
 
         <el-form-item label="状态">
