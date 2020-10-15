@@ -18,18 +18,18 @@
           <span>￥{{scope.row.price|filterPrice}}</span>
         </template>
       </el-table-column>
-      <el-table-column sortable prop="specsname" label="图片">
+      <el-table-column prop="specsname" label="图片">
         <template slot-scope="scope">
           <img :src="$imgPre + scope.row.img" />
         </template>
       </el-table-column>
-      <el-table-column sortable prop="specsname" label="是否新品">
+      <el-table-column prop="specsname" label="是否新品">
         <template slot-scope="scope">
           <el-button v-if="scope.row.isnew == 1" type="primary">是</el-button>
           <el-button v-else type="danger">否</el-button>
         </template>
       </el-table-column>
-      <el-table-column sortable prop="specsname" label="是否热卖">
+      <el-table-column prop="specsname" label="是否热卖">
         <template slot-scope="scope">
           <el-button v-if="scope.row.ishot == 1" type="primary">是</el-button>
           <el-button v-else type="danger">否</el-button>

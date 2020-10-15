@@ -238,7 +238,7 @@ export default {
           this.getSecondList();
           // 请求一下三级分类的list
           this.getThirdList();
-          console.log(this.dateValue);
+          // console.log(this.dateValue);
         } else {
           warningAlert(res.data.msg);
         }

@@ -6,7 +6,7 @@
         <el-input clearable v-model="user.username" placeholder="请输入账号"></el-input>
       </div>
       <div class="line">
-        <el-input type="password" clearable v-model="user.password" placeholder="请输入密码"></el-input>
+        <el-input type="password" clearable v-model="user.password" show-password placeholder="请输入密码"></el-input>
       </div>
       <div class="center line">
         <el-button type="primary" @click="login">登录</el-button>
