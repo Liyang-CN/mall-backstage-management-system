@@ -103,11 +103,27 @@ export default {
         this.form.type = 2;
       }
     },
+    checkDate(){
+      if(this.form.rolename == ''){
+        warningAlert('请填写角色名称')
+        return false
+      }
+      if(this.form.menus == '[]'){
+        warningAlert('请设置权限')
+        return false
+      }
+      return true
+    },
     // 点击添加按钮
     add() {
       // 树形控件取值 this.$refs.tree.getCheckedKeys()
       // 先获取到树形控件的值 并转换为后端要求的字符串数组格式
       this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys());
+
+      if(!this.checkDate()){
+        return
+      }
+      
       reqRoleAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           // 成功弹窗
@@ -142,6 +158,11 @@ export default {
     update() {
       // 讲树形控件的内容转换为字符数组传给后端
       this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys())
+
+      if(!this.checkDate()){
+        return
+      }
+
       reqRoleUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

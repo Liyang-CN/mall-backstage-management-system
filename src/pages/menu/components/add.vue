@@ -31,7 +31,7 @@
         <el-form-item label="菜单图标" v-if="form.type == 1">
           <el-select v-model="form.icon" placeholder="请选择菜单图标">
             <el-option v-for="item in icons" :key="item" :value="item">
-              <i :class="item"></i>
+              <i :class="item"> {{ item }}</i>
             </el-option>
           </el-select>
         </el-form-item>
@@ -133,8 +133,23 @@ export default {
         this.form.type = 2;
       }
     },
+    // 正则判断
+    checkData() {
+      if (this.form.title == "") {
+        warningAlert("菜单名称不能为空");
+        return false;
+      }
+      if (this.form.icon == "") {
+        warningAlert("请选择一个菜单图标");
+        return false;
+      }
+      return true;
+    },
     // 点击添加按钮
     add() {
+      if (!this.checkData()) {
+        return;
+      }
       reqMenuAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           // 成功弹窗
@@ -165,6 +180,9 @@ export default {
     },
     // 修改
     update() {
+      if (!this.checkData()) {
+        return;
+      }
       reqMenuUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

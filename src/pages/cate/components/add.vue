@@ -140,9 +140,18 @@ export default {
       };
       this.imgUrl = "";
     },
-
+    checkData() {
+      if (this.form.catename == "") {
+        warningAlert("请填写商品分类名称");
+        return false;
+      }
+      return true;
+    },
     // 点击添加按钮
     add() {
+      if (!this.checkData()) {
+        return;
+      }
       reqCateAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           // 成功弹窗
@@ -174,6 +183,9 @@ export default {
     },
     // 修改
     update() {
+      if (!this.checkData()) {
+        return;
+      }
       reqMenuUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

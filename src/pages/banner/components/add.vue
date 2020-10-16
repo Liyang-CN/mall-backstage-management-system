@@ -127,9 +127,22 @@ export default {
       };
       this.imgUrl = "";
     },
-
+    checkData() {
+      if (this.form.title == "") {
+        warningAlert("请填写轮播图标题");
+        return false;
+      }
+      if (!this.form.img) {
+        warningAlert("请选择一张图片作为轮播图");
+        return false;
+      }
+      return true
+    },
     // 点击添加按钮
     add() {
+      if(!this.checkData()){
+        return
+      }
       reqBannerAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           // 成功弹窗
@@ -161,6 +174,9 @@ export default {
     },
     // 修改
     update() {
+      if(!this.checkData()){
+        return
+      } 
       reqBannerUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

@@ -202,12 +202,30 @@ export default {
       // 三级商品分类的列表数据
       this.thirdGoodsList = [];
     },
+    checkData() {
+      if (this.form.title == "") {
+        warningAlert("请填写活动名称！");
+        return false;
+      }
+      if (!this.dateValue.length) {
+        warningAlert("请选择活动起始日期！");
+        return false;
+      }
+      if (this.form.goodsid == "") {
+        warningAlert("请选择一项具体活动商品");
+        return false;
+      }
+      return true;
+    },
     add() {
       // 将得到的时间转化为时间戳 存进form里
       let startTime = new Date(this.dateValue[0]).getTime();
       let endTime = new Date(this.dateValue[1]).getTime();
       this.form.begintime = startTime;
       this.form.endtime = endTime;
+      if (!this.checkData()) {
+        return;
+      }
       reqSeckillAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           // 成功
@@ -249,6 +267,9 @@ export default {
       let endTime = new Date(this.dateValue[1]).getTime();
       this.form.begintime = startTime;
       this.form.endtime = endTime;
+      if (!this.checkData()) {
+        return;
+      }
       reqSeckillUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

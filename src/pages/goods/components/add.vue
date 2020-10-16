@@ -4,7 +4,7 @@
       :visible.sync="info.isShow"
       :title="info.isAdd ? '添加商品' : '修改商品'"
       @closed="close"
-      @opened='opened'
+      @opened="opened"
     >
       <el-form ref="form" :model="form">
         <el-form-item label="一级分类">
@@ -100,7 +100,7 @@
   </div>
 </template>
 <script>
-import E from 'wangeditor'
+import E from "wangeditor";
 import { mapGetters, mapActions } from "vuex";
 import { successAlert, warningAlert } from "../../../utils/alert";
 import {
@@ -143,10 +143,10 @@ export default {
     }),
   },
   methods: {
-    opened(){
-      this.editor = new E('#editor');
+    opened() {
+      this.editor = new E("#editor");
       this.editor.create();
-      this.editor.txt.html(this.form.description)
+      this.editor.txt.html(this.form.description);
     },
     ...mapActions({
       reqCateListAction: "cate/reqListAction",
@@ -235,6 +235,21 @@ export default {
       // 商品属性list
       this.goodsAttrList = [];
     },
+    checkData() {
+      if (this.form.goodsname == "") {
+        warningAlert("请填写商品名称");
+        return false;
+      }
+      if (this.form.price == "") {
+        warningAlert("请填写商品价格");
+        return false;
+      }
+      if(!this.form.specsattr){
+        warningAlert("请选择商品属性")
+        return false
+      }
+      return true;
+    },
     add() {
       // 得到富文本的内容 赋值给description
       this.form.description = this.editor.txt.html();
@@ -242,6 +257,9 @@ export default {
         ...this.form,
         specsattr: JSON.stringify(this.form.specsattr),
       };
+      if (!this.checkData()) {
+        return;
+      }
       reqGoodsAdd(data).then((res) => {
         if (res.data.code == 200) {
           // 成功
@@ -259,20 +277,20 @@ export default {
       });
     },
     look(id) {
-      reqGoodsDetail({id:id}).then((res) => {
+      reqGoodsDetail({ id: id }).then((res) => {
         if (res.data.code == 200) {
           // 这个时候form没有id
           this.form = res.data.list;
-          this.form.id = id
+          this.form.id = id;
 
           // 请求一下二级分类的list
           this.getSecondList();
-          
+
           // 图片
-          this.imgUrl = this.$imgPre+this.form.img
+          this.imgUrl = this.$imgPre + this.form.img;
 
           // 商品属性从字符串转换为数组[]
-          this.form.specsattr = JSON.parse(this.form.specsattr)
+          this.form.specsattr = JSON.parse(this.form.specsattr);
 
           // 获取商品属性的数组
           this.getAttrArr();
@@ -287,7 +305,10 @@ export default {
       this.form.description = this.editor.txt.html();
       let data = {
         ...this.form,
-        specsattr:JSON.stringify(this.form.specsattr)
+        specsattr: JSON.stringify(this.form.specsattr),
+      };
+      if (!this.checkData()) {
+        return;
       }
       reqGoodsUpdate(data).then((res) => {
         if (res.data.code == 200) {

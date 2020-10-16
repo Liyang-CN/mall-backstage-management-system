@@ -74,7 +74,7 @@ export default {
     ...mapActions({
       reqRoleListAction: "role/reqListAction",
       reqManageListAction: "manage/reqListAction",
-      reqTotalAction:'manage/reqTotalAction'
+      reqTotalAction: "manage/reqTotalAction",
     }),
     // 取消按钮
     cancel() {
@@ -104,8 +104,26 @@ export default {
         this.form.type = 2;
       }
     },
+    checkDate(){
+      if(this.form.roleid == ''){
+        warningAlert('请选择所属角色')
+        return false
+      }
+      if (this.form.username == "") {
+        warningAlert("请填写用户名");
+        return false
+      }
+      if (this.form.password == "") {
+        warningAlert("请填写密码");
+        return false
+      }
+      return true
+    },
     // 点击添加按钮
     add() {
+      if(!this.checkDate()){
+        return
+      }
       reqManageAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           // 成功弹窗
@@ -117,7 +135,7 @@ export default {
           // list数据刷新
           this.reqManageListAction();
           // 重新获取总数
-          this.reqTotalAction()
+          this.reqTotalAction();
         } else {
           warningAlert(res.data.msg);
         }
@@ -137,6 +155,9 @@ export default {
     },
     // 修改
     update() {
+      if(!this.checkDate()){
+        return
+      }
       reqManageUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
