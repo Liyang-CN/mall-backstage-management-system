@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1>首页</h1>
     <div class="box" id="main"></div>
   </div>
@@ -63,10 +63,14 @@ export default {
 };
 </script>
 <style scoped>
+
 .box {
   width: 80%;
   height: 400px;
   margin: 20px auto;
   border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  background: #fff;
 }
 </style>

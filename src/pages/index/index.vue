@@ -77,7 +77,7 @@
     <el-container>
       <el-header class="header">
         <div class="header-con">
-          <h3>{{ userInfo.username }}</h3>
+          <h3>Hi，<span>{{ userInfo.username }}</span></h3>
           <el-button type="danger" @click="logOut">退出登录</el-button>
         </div>
       </el-header>
@@ -128,7 +128,10 @@ export default {
   background: #20222a;
 }
 .header {
-  background: #b3c0d1;
+  background: #eaebec;
+}
+.main{
+  background: #f0f2f5;
 }
 .con {
   padding-top: 20px;
@@ -139,6 +142,10 @@ export default {
 .header-con h3 {
   float: left;
   line-height: 60px;
+  color: #909399;
+}
+.header-con h3 span{
+  color: #a9d86e;
 }
 .header-con .el-button {
   float: left;
