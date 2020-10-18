@@ -174,7 +174,7 @@ export default {
         if (res.data.code == 200) {
           // 这个时候的form是没有id的
           this.form = res.data.list;
-          // this.form.id = id;
+          this.form.id = id;
           this.imgUrl = this.$imgPre + this.form.img;
         } else {
           warningAlert(res.data.msg);
@@ -186,7 +186,7 @@ export default {
       if (!this.checkData()) {
         return;
       }
-      reqMenuUpdate(this.form).then((res) => {
+      reqCateUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
           this.empty();

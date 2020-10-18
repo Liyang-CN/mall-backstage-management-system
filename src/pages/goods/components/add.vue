@@ -244,9 +244,9 @@ export default {
         warningAlert("请填写商品价格");
         return false;
       }
-      if(!this.form.specsattr){
-        warningAlert("请选择商品属性")
-        return false
+      if (!this.form.specsattr) {
+        warningAlert("请选择商品属性");
+        return false;
       }
       return true;
     },
@@ -296,6 +296,8 @@ export default {
           this.getAttrArr();
 
           // 给富文本赋值，但是这个时候编辑器还没有创建，所以要等有了编辑器才能赋值
+          // 得到富文本的内容 赋值给description
+          this.editor.txt.html(this.form.description);
         } else {
           warningAlert(res.data.msg);
         }
